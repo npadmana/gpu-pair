@@ -1,6 +1,8 @@
-CXX=g++-mp-4.5
-CXX_INCLUDE_PATHS = -I/usr/local/cuda/include
-CXX_FLAGS = -O2 -std=c++0x
+CXX=clang++
+CXX_INCLUDE_PATHS = -I/opt/local/include -I/usr/local/cuda/include
+CXX_WARNINGS = -Wno-logical-op-parentheses
+CXX_FLAGS = -O2 -std=c++11 $(CXX_WARNINGS)
+
 
 HEADERS = utils.h Particles.h
 OBJS = utils.o Particles.o
