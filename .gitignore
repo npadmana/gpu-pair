@@ -14,3 +14,6 @@
 # Vim temporaries
 *.swp
 *~
+
+# Executables
+*.x
