@@ -1,5 +1,5 @@
-#ifndef UTILS_H_
-#define UTILS_H_
+#ifndef CPU_UTILS_H_
+#define CPU_UTILS_H_
 
 // Collection of utility functions
 // Nikhil Padmanabhan, Yale, May 2012
@@ -20,14 +20,15 @@ class GSLRandom {
     double operator()(double a, double b);
 
     // Fill a vector
+    // This is a little complicated, simply to allow passing in arbitrary storage
     template <typename T> 
-    void operator()(double a, double b, std::vector<T> &vec) {
-      for (auto i=vec.begin(); i != vec.end(); ++i) 
-        *i = static_cast<T>(gsl_ran_flat(rng, a, b));
+    void operator()(double a, double b, T &vec) {
+    	typedef typename T::value_type type;
+    	for (auto i=vec.begin(); i != vec.end(); ++i)
+    		*i = static_cast<type>(gsl_ran_flat(rng, a, b));
     };
 
 };
-
 
 
 class CPUclock {

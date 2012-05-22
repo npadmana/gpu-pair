@@ -2,7 +2,7 @@
 #include "utils.h"
 #include <cmath>
 
-void CPU_PairCounts::naiveR(Particles& p1, Particles& p2, RHist& hh) {
+void CPU_PairCounts::naiveR(CPUParticles& p1, CPUParticles& p2, RHist& hh) {
 
   // Do the paircounts in the most naive manner
   float x1,y1,z1,x2,y2,z2,dx,dy,dz,rr;

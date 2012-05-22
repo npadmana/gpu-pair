@@ -1,11 +1,11 @@
 #include <iostream>
 #include "Particles.h"
-#include "utils.h"
+#include "cpu_utils.h"
 
 using namespace std;
 
 int main() {
-  Particles p1;   
+  CPUParticles p1;
   float x,y,z; int w;
 
   p1.mkRandom(25, 101);

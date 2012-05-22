@@ -4,6 +4,9 @@
 *.o
 *.gch
 
+# build directories
+build/*
+
 # Compiled Dynamic libraries
 *.so
 

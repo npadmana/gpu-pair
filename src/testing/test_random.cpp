@@ -1,5 +1,5 @@
 #include <iostream>
-#include "utils.h"
+#include "cpu_utils.h"
 #include <algorithm>
 
 using namespace std;
