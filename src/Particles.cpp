@@ -35,7 +35,7 @@ Particles::ParticleIterator Particles::end()  {
 }
 
 void unpackParticle(Particles::ParticleIterator& tup, float& x, float& y, float& z, int& w) {
-	auto t1 = *tup;
+	thrust::tuple<float, float, float, int> t1 = *tup; // Normally, this should have just been auto, but work-around for Eclipse
 	x = thrust::get<0>(t1);
 	y = thrust::get<1>(t1);
 	z = thrust::get<2>(t1);
