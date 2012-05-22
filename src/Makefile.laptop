@@ -4,8 +4,8 @@ CXX_WARNINGS = -Wno-logical-op-parentheses
 CXX_FLAGS = -O2 -std=c++11 $(CXX_WARNINGS)
 
 
-HEADERS = utils.h Particles.h
-OBJS = utils.o Particles.o
+HEADERS = utils.h Particles.h Hist.h CPU_PairCounts.h
+OBJS = utils.o Particles.o Hist.o CPU_PairCounts.o
 TESTS = test_random.cpp test_particles1.cpp
 
 LIBS = -lgsl -L/opt/local/lib

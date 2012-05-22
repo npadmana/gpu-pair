@@ -16,3 +16,17 @@ double GSLRandom::operator()(double a, double b) {
   return gsl_ran_flat(rng, a, b);
 }
 
+
+CPUclock::CPUclock() {
+  this->reset();
+}
+
+void CPUclock::reset() {
+  t0 = clock();
+}
+
+double CPUclock::elapsed() {
+  clock_t t1;
+  t1 = clock();
+  return (static_cast<double>(t1-t0))/(static_cast<double>(CLOCKS_PER_SEC)) * 1000.0;
+}

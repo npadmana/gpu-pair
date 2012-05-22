@@ -24,11 +24,11 @@ void Particles::mkRandom(int N, unsigned long int seed) {
 }
 
 
-auto Particles::begin() -> decltype(thrust::make_zip_iterator(thrust::make_tuple(x.begin(), y.begin(), z.begin(), w.begin()))) {
+auto Particles::begin() const -> decltype(thrust::make_zip_iterator(thrust::make_tuple(x.begin(), y.begin(), z.begin(), w.begin()))) {
   return thrust::make_zip_iterator(thrust::make_tuple(x.begin(), y.begin(), z.begin(), w.begin()));
 }
 
-auto Particles::end() -> decltype(thrust::make_zip_iterator(thrust::make_tuple(x.end(), y.end(), z.end(), w.end()))) {
+auto Particles::end() const -> decltype(thrust::make_zip_iterator(thrust::make_tuple(x.end(), y.end(), z.end(), w.end()))) {
   return thrust::make_zip_iterator(thrust::make_tuple(x.end(), y.end(), z.end(), w.end()));
 }
 

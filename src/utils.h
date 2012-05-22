@@ -5,6 +5,7 @@
 // Nikhil Padmanabhan, Yale, May 2012
 
 #include <vector>
+#include <ctime>
 #include <thrust/tuple.h>
 #include "gsl/gsl_rng.h"
 #include "gsl/gsl_randist.h"
@@ -36,6 +37,16 @@ void unpack4(const thrust::tuple<X,Y,Z,W>& tup, X& x, Y& y, Z& z, W& w) {
   z = thrust::get<2>(tup);
   w = thrust::get<3>(tup);
 }
+
+
+class CPUclock {
+  private :
+    clock_t t0;
+  public :
+    CPUclock();
+    void reset();
+    double elapsed();
+};
 
 
 #endif /* UTILS_H_ */
