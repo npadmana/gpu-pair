@@ -2,13 +2,17 @@
 #define PARTICLES_H_ 
 
 #include <vector>
-#include <thrust/iterator/zip_iterator.h>
+#include "thrust/iterator/zip_iterator.h"
 
 class Particles {
   public :
     int Npart;
     std::vector<float> x,y,z;
     std::vector<int> w;
+    typedef std::vector<float>::iterator FloatIterator;
+    typedef std::vector<int>::iterator IntIterator;
+    typedef thrust::tuple<FloatIterator, FloatIterator, FloatIterator, IntIterator> TupleIterator;
+    typedef thrust::zip_iterator<TupleIterator> ParticleIterator;
 
 
     // Functions
@@ -23,9 +27,11 @@ class Particles {
 
 
     // zip_iterators
-    auto begin() const -> decltype(thrust::make_zip_iterator(thrust::make_tuple(x.begin(), y.begin(), z.begin(), w.begin())));
-    auto end() const -> decltype(thrust::make_zip_iterator(thrust::make_tuple(x.end(), y.end(), z.end(), w.end())));
+    ParticleIterator begin();
+    ParticleIterator end();
 };
     
+
+void unpackParticle(Particles::ParticleIterator &tup, float& x, float& y, float& z, int& w);
 
 #endif /* PARTICLES_H_ */

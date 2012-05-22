@@ -6,7 +6,6 @@
 
 #include <vector>
 #include <ctime>
-#include <thrust/tuple.h>
 #include "gsl/gsl_rng.h"
 #include "gsl/gsl_randist.h"
 
@@ -29,14 +28,6 @@ class GSLRandom {
 
 };
 
-
-template <typename X, typename Y, typename Z, typename W>
-void unpack4(const thrust::tuple<X,Y,Z,W>& tup, X& x, Y& y, Z& z, W& w) {
-  x = thrust::get<0>(tup);
-  y = thrust::get<1>(tup);
-  z = thrust::get<2>(tup);
-  w = thrust::get<3>(tup);
-}
 
 
 class CPUclock {

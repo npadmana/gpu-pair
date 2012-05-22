@@ -1,8 +1,8 @@
 #include "Particles.h"
 #include "utils.h"
+#include <thrust/tuple.h>
 
 using namespace std;
-
 
 void Particles::resize(int N) {
   Npart = N;
@@ -24,11 +24,22 @@ void Particles::mkRandom(int N, unsigned long int seed) {
 }
 
 
-auto Particles::begin() const -> decltype(thrust::make_zip_iterator(thrust::make_tuple(x.begin(), y.begin(), z.begin(), w.begin()))) {
-  return thrust::make_zip_iterator(thrust::make_tuple(x.begin(), y.begin(), z.begin(), w.begin()));
+Particles::ParticleIterator Particles::begin()  {
+  ParticleIterator ii(thrust::make_zip_iterator(thrust::make_tuple(x.begin(), y.begin(), z.begin(), w.begin())));
+  return ii;
 }
 
-auto Particles::end() const -> decltype(thrust::make_zip_iterator(thrust::make_tuple(x.end(), y.end(), z.end(), w.end()))) {
-  return thrust::make_zip_iterator(thrust::make_tuple(x.end(), y.end(), z.end(), w.end()));
+Particles::ParticleIterator Particles::end()  {
+  ParticleIterator ii(thrust::make_zip_iterator(thrust::make_tuple(x.end(), y.end(), z.end(), w.end())));
+  return ii;
 }
+
+void unpackParticle(Particles::ParticleIterator& tup, float& x, float& y, float& z, int& w) {
+	auto t1 = *tup;
+	x = thrust::get<0>(t1);
+	y = thrust::get<1>(t1);
+	z = thrust::get<2>(t1);
+	w = thrust::get<3>(t1);
+}
+
 

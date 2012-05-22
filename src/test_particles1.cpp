@@ -11,7 +11,7 @@ int main() {
   p1.mkRandom(25, 101);
   
   for (auto i=p1.begin(); i !=p1.end(); ++i) {
-      unpack4<float, float, float, int>(*i, x,y,z,w);
+      unpackParticle(i,x,y,z,w);
       cout << x << " " << y << " " << z << " " << w << endl;
   }
 }
