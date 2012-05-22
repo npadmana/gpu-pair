@@ -1,10 +1,10 @@
 #include "CPU_PairCounts.h"
-#include "utils.h"
+#include "cpu_utils.h"
 #include <cmath>
 
 void CPU_PairCounts::naiveR(CPUParticles& p1, CPUParticles& p2, RHist& hh) {
 
-  // Do the paircounts in the most naive manner
+  // Do the pair counts in the most naive manner
   float x1,y1,z1,x2,y2,z2,dx,dy,dz,rr;
   int w1, w2, ibin;
 
