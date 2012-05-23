@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
 		GPUclock t1;
 		GPU_PairCounts::naiveR(Nblocks, Nthreads, g1, g2, gpu_rr);
 		float dt = t1.elapsed();
-		cout << "Time to move the particles to the GPU (ms) ::" << dt << endl;
+		cout << "Time to count the pairs on the GPU (ms) ::" << dt << endl;
 	}
 	
 	// Compare histograms
