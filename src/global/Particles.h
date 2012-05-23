@@ -16,6 +16,12 @@ class Particles {
 	typedef typename IntVec::iterator IntIterator;
     typedef thrust::tuple< FloatIterator, FloatIterator, FloatIterator, IntIterator > TupleIterator;
     typedef thrust::zip_iterator<TupleIterator> ParticleIterator;
+	typedef typename FloatVec::const_iterator const_FloatIterator;
+	typedef typename IntVec::const_iterator const_IntIterator;
+    typedef thrust::tuple< const_FloatIterator, const_FloatIterator, const_FloatIterator, const_IntIterator > const_TupleIterator;
+    typedef thrust::zip_iterator<const_TupleIterator> const_ParticleIterator;
+
+
 
 	// Members
     int Npart;
@@ -49,18 +55,29 @@ class Particles {
     // zip_iterators
     ParticleIterator begin() {
     	ParticleIterator ii(thrust::make_zip_iterator(thrust::make_tuple(x.begin(), y.begin(), z.begin(), w.begin())));
-    	  return ii;
+    	return ii;
     }
 
     ParticleIterator end() {
     	ParticleIterator ii(thrust::make_zip_iterator(thrust::make_tuple(x.end(), y.end(), z.end(), w.end())));
-    	  return ii;
+    	return ii;
     }
+
+    const_ParticleIterator cbegin() const {
+    	const_ParticleIterator ii(thrust::make_zip_iterator(thrust::make_tuple(x.cbegin(), y.cbegin(), z.cbegin(), w.cbegin())));
+    	return ii;
+    }
+
+    const_ParticleIterator cend() const {
+    	const_ParticleIterator ii(thrust::make_zip_iterator(thrust::make_tuple(x.cend(), y.cend(), z.cend(), w.cend())));
+    	return ii;
+    }
+
 };
     
 
 template <typename T>
-void unpackParticle(T &tup, float& x, float& y, float& z, int& w) {
+void unpackParticle(const T &tup, float& x, float& y, float& z, int& w) {
 	thrust::tuple<float, float, float, int> t1 = *tup; // Normally, this should have just been auto, but work-around for Eclipse
 	x = thrust::get<0>(t1);
 	y = thrust::get<1>(t1);

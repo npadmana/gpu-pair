@@ -8,7 +8,7 @@ namespace CPU_PairCounts
 {
 
   // Naive pair counter 
-  void naiveR(CPUParticles &p1, CPUParticles &p2, RHist& rhist);
+  void naiveR(const CPUParticles &p1, const CPUParticles &p2, RHist& rhist);
 
 
 };
