@@ -4,8 +4,12 @@
 #include <vector>
 #include <thrust/iterator/zip_iterator.h>
 #include <thrust/host_vector.h>
+#ifdef __CUDACC__
+#include <thrust/device_vector.h>
+#endif
 #include <thrust/tuple.h>
 #include <thrust/fill.h>
+#include <thrust/copy.h>
 #include "cpu_utils.h"
 
 template <class FloatVec, class IntVec>
@@ -51,7 +55,6 @@ class Particles {
     	  thrust::fill(w.begin(), w.end(), 1);
     }
 
-
     // zip_iterators
     ParticleIterator begin() {
     	ParticleIterator ii(thrust::make_zip_iterator(thrust::make_tuple(x.begin(), y.begin(), z.begin(), w.begin())));
@@ -74,7 +77,15 @@ class Particles {
     }
 
 };
-    
+
+template <typename F1, typename I1, typename F2, typename I2>
+void moveParticles(const Particles<F1, I1>& p1, Particles<F2, I2>& p2) {
+	// Make sure there is enough space
+	p2.resize(p1.Npart);
+
+	// Move
+	thrust::copy(p1.cbegin(), p1.cend(), p2.begin());
+}
 
 template <typename T>
 void unpackParticle(const T &tup, float& x, float& y, float& z, int& w) {
@@ -85,8 +96,13 @@ void unpackParticle(const T &tup, float& x, float& y, float& z, int& w) {
 	w = thrust::get<3>(t1);
 }
 
-// CPUParticles
-typedef Particles<thrust::host_vector<float>, thrust::host_vector<int> > CPUParticles;
 
+
+
+// Particles typedefs
+typedef Particles<thrust::host_vector<float>, thrust::host_vector<int> > CPUParticles;
+#ifdef __CUDACC__
+typedef Particles<thrust::device_vector<float>, thrust::device_vector<int> > GPUParticles;
+#endif
 
 #endif /* PARTICLES_H_ */

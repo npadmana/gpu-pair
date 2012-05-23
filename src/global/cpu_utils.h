@@ -24,9 +24,10 @@ class GSLRandom {
     template <typename T> 
     void operator()(double a, double b, T &vec) {
     	typedef typename T::value_type type;
-    	for (auto i=vec.begin(); i != vec.end(); ++i)
+    	typedef typename T::iterator iter;
+    	for (iter i=vec.begin(); i != vec.end(); ++i)
     		*i = static_cast<type>(gsl_ran_flat(rng, a, b));
-    };
+    }
 
 };
 

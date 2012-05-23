@@ -8,3 +8,4 @@ link_directories("$ENV{GSL_DIR}/lib")
 
 ADD_SUBDIRECTORY(global)
 add_subdirectory(testing)
+add_subdirectory(gpu_testing)
