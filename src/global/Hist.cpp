@@ -31,6 +31,7 @@ void diffHist(const RHist &r1, const RHist &r2) {
 		if (tmp > ii) {diff1 = tmp-ii;}
 		else { diff1 = ii-tmp;}
 		if (diff1 > diff) {diff = diff1; val = ii;}
+		++jj;
 	});
 	cout << "The largest difference between the two histograms was :: " << diff << endl;
 	cout << "The value at that point was :: " << val << endl;
