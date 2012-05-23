@@ -56,7 +56,7 @@ class GPUclock
 
     float ms_elapsed;
     cuda_safe_call(cudaEventElapsedTime(&ms_elapsed, start, end));
-    return ms_elapsed / 1e3;
+    return ms_elapsed;
   }
 
   double epsilon(void)
