@@ -64,6 +64,10 @@ int main(int argc, char *argv[]) {
 	}
 	
 	// Compare histograms
+	if (Nbins < 25) {
+		cpu_rr.print();
+		gpu_rr.print();
+	}
 	diffHist(cpu_rr, gpu_rr);
 
 }
