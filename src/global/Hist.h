@@ -10,6 +10,7 @@ class RHist {
     std::vector<unsigned long long> hist;
 
     RHist(int n, float r0, float _dr);
+    void print();
 
 };
 
