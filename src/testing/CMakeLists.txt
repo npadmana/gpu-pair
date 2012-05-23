@@ -10,3 +10,6 @@ target_link_libraries(test_random.x pairs_global gsl)
 
 add_executable(test_particles1.x test_particles1.cpp)
 target_link_libraries(test_particles1.x pairs_global gsl)
+
+add_executable(test_particles2.x test_particles2.cpp)
+target_link_libraries(test_particles2.x pairs_global gsl)
