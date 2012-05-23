@@ -14,5 +14,7 @@ class RHist {
 
 };
 
+void diffHist(const RHist &r1, const RHist &r2);
+
 
 #endif /* HIST_H_ */
