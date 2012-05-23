@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 PROJECT ( gpu-pair )
 
 include_directories("$ENV{GSL_DIR}/include")
-include_directories("/usr/local/cuda/include")
+include_directories("$ENV{CUDA_DIR}/include")
 link_directories("$ENV{GSL_DIR}/lib")
 
 
