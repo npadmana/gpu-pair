@@ -226,7 +226,7 @@ void GPU_PairCounts::sharedbufferedR(int Nblocks, int Nthreads, GPUParticles& p1
 			rr.Nbins, rr.rmin, rr.dr, thrust::raw_pointer_cast(&hist[0]));
 	
 	
-	thrust::copy(hist.begin(), hist.end(), rr.hist.begin());
+//	thrust::copy(hist.begin(), hist.end(), rr.hist.begin());
 	
 }
 
