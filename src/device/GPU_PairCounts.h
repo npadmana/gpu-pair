@@ -12,7 +12,7 @@
 #include "Hist.h"
 
 const int BUFHIST=1024;
-
+const int PARTICLEBUFFER=1024;
 
 namespace GPU_PairCounts {
 
