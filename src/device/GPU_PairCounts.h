@@ -11,11 +11,13 @@
 #include "Particles.h"
 #include "Hist.h"
 
+const int BUFHIST=1024;
+
 
 namespace GPU_PairCounts {
 
 	void naiveR(int Nblocks, int Nthreads, GPUParticles &p1, GPUParticles &p2, RHist& rhist);
-
+	void sharedR(int Nblocks, int Nthreads, GPUParticles& p1, GPUParticles& p2, RHist& rr);
 }
 
 
