@@ -58,12 +58,12 @@ int main(int argc, char *argv[]) {
 	}
 	
 	// Pair counting on the GPU -- sharing and buffering
-	{
-		GPUclock t1;
-		GPU_PairCounts::sharedbufferedR(Nblocks, Nthreads, g1, g2, gpu_rr);
-		float dt = t1.elapsed();
-		cout << "Time to count the pairs on the GPU (ms) ::" << dt << endl;
-	}
+//	{
+//		GPUclock t1;
+//		GPU_PairCounts::sharedbufferedR(Nblocks, Nthreads, g1, g2, gpu_rr);
+//		float dt = t1.elapsed();
+//		cout << "Time to count the pairs on the GPU (ms) ::" << dt << endl;
+//	}
 	
 	// Compare histograms
 	if (Nbins < 25) {
