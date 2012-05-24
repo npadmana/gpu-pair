@@ -76,6 +76,6 @@ int main(int argc, char *argv[]) {
 	// A little wasteful
 	cout << "Minimum time :" << *min_element(timing.begin(), timing.end()) << endl;
 	cout << "Maximum time :" << *max_element(timing.begin(), timing.end()) << endl;
-	cout << "Average time :" << accumulate(timing.begin(), timing.end(), 0.0)/static_cast<float>(niter);
+	cout << "Average time :" << accumulate(timing.begin(), timing.end(), 0.0)/static_cast<float>(niter) << endl;
 	
 }
