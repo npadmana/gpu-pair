@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 	cout << "A simple test of the pair counting code" << endl;
 
 	// Do a simple check on the number of arguments
-	if (argc != 5) {
+	if (argc != 6) {
 		cout << "timing_shared_gpuonly Npart Nbins blockfac Nthreads niter\n";
 		exit(1);
 	}
