@@ -18,6 +18,7 @@ namespace GPU_PairCounts {
 
 	void naiveR(int Nblocks, int Nthreads, GPUParticles &p1, GPUParticles &p2, RHist& rhist);
 	void sharedR(int Nblocks, int Nthreads, GPUParticles& p1, GPUParticles& p2, RHist& rr);
+	void sharedbufferedR(int Nblocks, int Nthreads, GPUParticles& p1, GPUParticles& p2, RHist& rr);
 }
 
 

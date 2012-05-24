@@ -129,8 +129,8 @@ __global__ void shared_buffered_r_kernel
 	__shared__ long long _hist[BUFHIST];
 	
 	// Allocate particle buffers 
-	__shared__ float _xbuf[PARTICLEBUFFER], _ybuf[PARTICLEBUFFER], _zbuf[PARTICLEBUFFER];
-	__shared__ int _wbuf[PARTICLEBUFFER];
+	__shared__ float xbuf[PARTICLEBUFFER], ybuf[PARTICLEBUFFER], zbuf[PARTICLEBUFFER];
+	__shared__ int wbuf[PARTICLEBUFFER];
 
 	// We distribute p1, but loop through all of p2
 	int ii, jj, idr, nh1, ih, hstart, hend, nbuf, kk;
@@ -212,6 +212,22 @@ __global__ void shared_buffered_r_kernel
 		}
 		__syncthreads();
 	}
+}
+
+
+void GPU_PairCounts::sharedbufferedR(int Nblocks, int Nthreads, GPUParticles& p1, GPUParticles& p2, RHist& rr) {
+	// Copy the histogram onto the device --- we track the previous values
+	thrust::device_vector<unsigned long long> hist(rr.hist);
+	
+	shared_buffered_r_kernel<<<Nblocks, Nthreads>>> (p1.Npart, thrust::raw_pointer_cast(&p1.x[0]), thrust::raw_pointer_cast(&p1.y[0]), 
+			thrust::raw_pointer_cast(&p1.z[0]), thrust::raw_pointer_cast(&p1.w[0]),
+			p2.Npart, thrust::raw_pointer_cast(&p2.x[0]), thrust::raw_pointer_cast(&p2.y[0]), 
+			thrust::raw_pointer_cast(&p2.z[0]), thrust::raw_pointer_cast(&p2.w[0]),
+			rr.Nbins, rr.rmin, rr.dr, thrust::raw_pointer_cast(&hist[0]));
+	
+	
+	thrust::copy(hist.begin(), hist.end(), rr.hist.begin());
+	
 }
 
 

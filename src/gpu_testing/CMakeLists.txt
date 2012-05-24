@@ -22,3 +22,7 @@ target_link_libraries(timing_shared.x pairs_global pairs_device gsl gslcblas)
 
 CUDA_ADD_EXECUTABLE(timing_shared_gpuonly.x timing_shared_gpuonly.cu OPTIONS -O2 -arch=sm_20)
 target_link_libraries(timing_shared_gpuonly.x pairs_global pairs_device gsl gslcblas)
+
+CUDA_ADD_EXECUTABLE(timing_shared_buffered.x timing_shared_buffered.cu OPTIONS -O2 -arch=sm_20)
+target_link_libraries(timing_shared_buffered.x pairs_global pairs_device gsl gslcblas)
+
