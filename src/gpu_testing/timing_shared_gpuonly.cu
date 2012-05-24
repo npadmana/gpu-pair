@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
 	// Do a simple check on the number of arguments
 	if (argc != 5) {
 		cout << "timing_shared_gpuonly Npart Nbins blockfac Nthreads niter\n";
+		exit(1);
 	}
 	
 	// Get parameters
