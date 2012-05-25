@@ -82,7 +82,7 @@ __global__ void shared_r_kernel
 				dx = x2[jj] - x;
 				dy = y2[jj] - y;
 				dz = z2[jj] - z;
-				_w2 = w2[ii];
+				_w2 = w2[jj];
 				rr = sqrtf(dx*dx + dy*dy + dz*dz);
 				idr = (int) ((rr-rmin)/dr);
 				if ((idr < hend) && (idr >= hstart)) atomicAdd( (unsigned long long*) &_hist[idr-hstart], _w2*_w1);
@@ -190,7 +190,7 @@ __global__ void shared_buffered_r_kernel
 					dx = xbuf[jj] - x;
 					dy = ybuf[jj] - y;
 					dz = zbuf[jj] - z;
-					_w2 = wbuf[ii];
+					_w2 = wbuf[jj];
 					rr = sqrtf(dx*dx + dy*dy + dz*dz);
 					idr = (int) ((rr-rmin)/dr);
 					if ((idr < hend) && (idr >= hstart)) atomicAdd( (unsigned long long*) &_hist[idr-hstart], _w2*_w1);
@@ -226,7 +226,7 @@ void GPU_PairCounts::sharedbufferedR(int Nblocks, int Nthreads, GPUParticles& p1
 			rr.Nbins, rr.rmin, rr.dr, thrust::raw_pointer_cast(&hist[0]));
 	
 	
-//	thrust::copy(hist.begin(), hist.end(), rr.hist.begin());
+	thrust::copy(hist.begin(), hist.end(), rr.hist.begin());
 	
 }
 
