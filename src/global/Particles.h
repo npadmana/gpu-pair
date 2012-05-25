@@ -91,8 +91,7 @@ void moveParticles(const Particles<F1, I1>& p1, Particles<F2, I2>& p2, int buffe
 
 	// Fill the buffered region
 	if ((p1.Npart % buffer) != 0) {
-		thrust::fill(p2.begin()+p1.Npart, p2.end(), *p1.cbegin()); // We could do this in one step, but this avoids typing
-		thrust::fill(p2.w.begin()+p1.Npart, p2.w.end(), 0); // Zero out the weights
+		thrust::fill(p2.begin()+p1.Npart, p2.end(), thrust::make_tuple(p1.x[0], p1.y[0], p1.z[0], 0));
 	}
 }
 
