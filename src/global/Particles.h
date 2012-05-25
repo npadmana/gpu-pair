@@ -79,12 +79,21 @@ class Particles {
 };
 
 template <typename F1, typename I1, typename F2, typename I2>
-void moveParticles(const Particles<F1, I1>& p1, Particles<F2, I2>& p2) {
+void moveParticles(const Particles<F1, I1>& p1, Particles<F2, I2>& p2, int buffer=1) {
+	// Figure out the correct size and pad
+	int n2 = ((p1.Npart + buffer - 1)/buffer) * buffer; // Note that the term in parentheses is integer multiplication
+
 	// Make sure there is enough space
-	p2.resize(p1.Npart);
+	p2.resize(n2);
 
 	// Move
 	thrust::copy(p1.cbegin(), p1.cend(), p2.begin());
+
+	// Fill the buffered region
+	if ((p1.Npart % buffer) != 0) {
+		thrust::fill(p2.begin()+p1.Npart, p2.end(), *p1.cbegin()); // We could do this in one step, but this avoids typing
+		thrust::fill(p2.w.begin()+p1.Npart, p2.w.end(), 0); // Zero out the weights
+	}
 }
 
 template <typename T>
