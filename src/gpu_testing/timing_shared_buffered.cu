@@ -43,8 +43,8 @@ int main(int argc, char *argv[]) {
 	GPUParticles g1, g2;
 	{
 		GPUclock t1;
-		moveParticles(p1, g1);
-		moveParticles(p2, g2);
+		moveParticles(p1, g1, Nthreads);
+		moveParticles(p2, g2, Nthreads);
 		float dt = t1.elapsed();
 		cout << "Time to move the particles to the GPU (ms) ::" << dt << endl;
 	}

@@ -219,6 +219,10 @@ void GPU_PairCounts::sharedbufferedR(int Nblocks, int Nthreads, GPUParticles& p1
 	// Copy the histogram onto the device --- we track the previous values
 	thrust::device_vector<unsigned long long> hist(rr.hist);
 	
+	// Assert if numbers of particles are not commensurate with number of threads
+	if ((p1.Npart%Nthreads)!=0) throw "p1 not commensurate with Nthreads";
+	if ((p2.Npart%Nthreads)!=0) throw "p2 not commensurate with Nthreads";
+	
 	shared_buffered_r_kernel<<<Nblocks, Nthreads>>> (p1.Npart, thrust::raw_pointer_cast(&p1.x[0]), thrust::raw_pointer_cast(&p1.y[0]), 
 			thrust::raw_pointer_cast(&p1.z[0]), thrust::raw_pointer_cast(&p1.w[0]),
 			p2.Npart, thrust::raw_pointer_cast(&p2.x[0]), thrust::raw_pointer_cast(&p2.y[0]), 
