@@ -83,7 +83,7 @@ __global__ void shared_r_kernel
 				dy = y2[jj] - y;
 				dz = z2[jj] - z;
 				_w2 = w2[jj];
-				rr = __fsqrt_rn(dx*dx + dy*dy + dz*dz);
+				rr = sqrtf(dx*dx + dy*dy + dz*dz);
 				idr = (int) ((rr-rmin)/dr);
 				if ((idr < hend) && (idr >= hstart)) atomicAdd( (unsigned long long*) &_hist[idr-hstart], _w2*_w1);
 			}
