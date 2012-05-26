@@ -107,9 +107,7 @@ __global__ void shared_r_kernel
 void GPU_PairCounts::sharedR(int Nblocks, int Nthreads, GPUParticles& p1, GPUParticles& p2, RHist& rr) {
 	// Copy the histogram onto the device --- we track the previous values
 	thrust::device_vector<unsigned long long> hist(rr.hist);
-	
-	cudaFuncSetCacheConfig( shared_r_kernel, cudaFuncCachePreferL1 );
-	
+		
 	shared_r_kernel<<<Nblocks, Nthreads>>> (p1.Npart, thrust::raw_pointer_cast(&p1.x[0]), thrust::raw_pointer_cast(&p1.y[0]), 
 			thrust::raw_pointer_cast(&p1.z[0]), thrust::raw_pointer_cast(&p1.w[0]),
 			p2.Npart, thrust::raw_pointer_cast(&p2.x[0]), thrust::raw_pointer_cast(&p2.y[0]), 
