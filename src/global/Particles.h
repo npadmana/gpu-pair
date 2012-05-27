@@ -161,7 +161,7 @@ void sortParticles(Particles<F1,I1>& p, int start, int end, int dim) {
 		thrust::copy(p.y.begin()+start, p.y.begin()+end, key.begin());
 		break;
 	case 2 :
-		thrust::copy(p.z.begin()+start, p.z.begin(), key.begin());
+		thrust::copy(p.z.begin()+start, p.z.begin()+end, key.begin());
 		break;
 
 	}

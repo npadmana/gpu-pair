@@ -36,4 +36,13 @@ int main() {
   }
 
 
+  // Test partial sort
+  cout << "Partial sort" << endl;
+  sortParticles(p1, 3, 8, 0);
+  for (auto i=p1.begin(); i !=p1.end(); ++i) {
+      unpackParticle(i,x,y,z,w);
+      cout << x << " " << y << " " << z << " " << w << endl;
+  }
+
+
 }
