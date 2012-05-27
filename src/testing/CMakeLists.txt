@@ -25,4 +25,6 @@ target_link_libraries(test_particles_minmax.x pairs_global gsl gslcblas)
 
 add_executable(test_particles_sort.x test_particles_sort.cpp)
 target_link_libraries(test_particles_sort.x pairs_global gsl gslcblas)
+
+add_executable(test_npvector.x test_npvector.cpp)
     
