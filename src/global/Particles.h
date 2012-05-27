@@ -8,8 +8,12 @@
 #include <thrust/device_vector.h>
 #endif
 #include <thrust/tuple.h>
+#include <thrust/pair.h>
 #include <thrust/fill.h>
 #include <thrust/copy.h>
+#include <thrust/extrema.h>
+
+#include "NPVector.h"
 #include "cpu_utils.h"
 
 template <class FloatVec, class IntVec>
@@ -20,10 +24,14 @@ class Particles {
 	typedef typename IntVec::iterator IntIterator;
     typedef thrust::tuple< FloatIterator, FloatIterator, FloatIterator, IntIterator > TupleIterator;
     typedef thrust::zip_iterator<TupleIterator> ParticleIterator;
+    typedef thrust::pair<FloatIterator, FloatIterator> const_mmIter;
+
+
 	typedef typename FloatVec::const_iterator const_FloatIterator;
 	typedef typename IntVec::const_iterator const_IntIterator;
     typedef thrust::tuple< const_FloatIterator, const_FloatIterator, const_FloatIterator, const_IntIterator > const_TupleIterator;
     typedef thrust::zip_iterator<const_TupleIterator> const_ParticleIterator;
+    typedef thrust::pair<const_FloatIterator, const_FloatIterator> mmIter;
 
 
 
@@ -102,6 +110,38 @@ void unpackParticle(const T &tup, float& x, float& y, float& z, int& w) {
 	y = thrust::get<1>(t1);
 	z = thrust::get<2>(t1);
 	w = thrust::get<3>(t1);
+}
+
+template <typename F1, typename I1>
+thrust::pair<NPVector3f, NPVector3f> minmaxParticle(Particles<F1, I1>& p) {
+
+	NPVector3f min, max;
+	typedef typename Particles<F1,I1>::mmIter mmtype;
+
+	// X
+	{
+		mmtype tup = thrust::minmax_element(p.x.begin(), p.x.end());
+		min[0] = *(thrust::get<0>(tup));
+		max[0] = *(thrust::get<1>(tup));
+	}
+
+	// Y
+	{
+		mmtype tup = thrust::minmax_element(p.y.begin(), p.y.end());
+		min[1] = *(thrust::get<0>(tup));
+		max[1] = *(thrust::get<1>(tup));
+	}
+
+	// Z
+	{
+		mmtype tup = thrust::minmax_element(p.z.begin(), p.z.end());
+		min[2] = *(thrust::get<0>(tup));
+		max[2] = *(thrust::get<1>(tup));
+	}
+
+
+	return thrust::make_pair(min, max);
+
 }
 
 

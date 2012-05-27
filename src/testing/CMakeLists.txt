@@ -19,3 +19,6 @@ target_link_libraries(timing_cpu_naive.x pairs_global gsl gslcblas)
 
 add_executable(test_particles3.x test_particles3.cpp)
 target_link_libraries(test_particles3.x pairs_global gsl gslcblas)
+
+add_executable(test_particles_minmax.x test_particles_minmax.cpp)
+target_link_libraries(test_particles_minmax.x pairs_global gsl gslcblas)
