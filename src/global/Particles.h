@@ -12,6 +12,7 @@
 #include <thrust/fill.h>
 #include <thrust/copy.h>
 #include <thrust/extrema.h>
+#include <thrust/sort.h>
 
 #include "NPVector.h"
 #include "cpu_utils.h"
@@ -141,6 +142,31 @@ thrust::pair<NPVector3f, NPVector3f> minmaxParticle(Particles<F1, I1>& p) {
 
 
 	return thrust::make_pair(min, max);
+
+}
+
+
+template <typename F1, typename I1>
+void sortParticles(Particles<F1,I1>& p, int start, int end, int dim) {
+
+	// Define the key
+	F1 key;
+	key.resize(end-start);
+
+	switch (dim) {
+	case 0 :
+		thrust::copy(p.x.begin()+start, p.x.begin()+end, key.begin());
+		break;
+	case 1 :
+		thrust::copy(p.y.begin()+start, p.y.begin()+end, key.begin());
+		break;
+	case 2 :
+		thrust::copy(p.z.begin()+start, p.z.begin(), key.begin());
+		break;
+
+	}
+
+	thrust::sort_by_key(key.begin(), key.end(), p.begin()+start);
 
 }
 
